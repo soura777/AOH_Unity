@@ -1,0 +1,71 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block title %}ARCADEMY{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<style>
+    body {
+        overflow: hidden;
+    }
+</style>
+
+<div class="video-background" style="position: absolute; top: 0;left: 0;width: 100%;height: 100%;z-index: -1;overflow: hidden;">
+  <video autoplay loop muted style="width: 100%;height: 100%; object-fit: cover;">
+      <source src="{% static 'images/2611250-hd_1920_1080_30fps.mp4' %}" type="video/mp4">
+      video tag
+  </video>
+</div>
+    <h2 style="padding: 5px; margin-top: -38px; border-radius: 8px; color: aliceblue;">&nbsp&nbsp&nbsp&nbspWelcome, {{ user.name }} !!!</h2>
+    <h3 style="color: white; " class="mt-5 mb-5">Subjects <small><small style="color: black; background-color: rgb(188, 219, 247); width: 16%; padding: 5px; border-radius: 8px;"> >> 12th Standard</small></small> </h3>
+    <div class="d-flex flex-row">
+        {% for subject in subjects %}
+        <div class="card mr-5" style="width: 18rem;">
+            <img class="card-img-top" src="{{ subject.image.url }}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{ subject.name }}</h5>
+                <p class="card-text">{{ subject.tagline }}</p>
+                <a href="{% url 'subject' subject.name %}" class="btn btn-primary">Show topics</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+
+<style>
+    body {
+        overflow: hidden;
+    }
+</style>
+
+<div class="video-background" style="position: absolute; top: 0;left: 0;width: 100%;height: 100%;z-index: -1;overflow: hidden;">
+  <video autoplay loop muted style="width: 100%;height: 100%; object-fit: cover;">
+      <source src="{% static 'images/7547023-hd_1920_1080_25fps.mp4' %}" type="video/mp4">
+      Your browser does not support the video tag.
+  </video>
+</div>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-interval="false" data-ride="carousel">
+     
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img  class="d-block w-100" src="{% static 'images/banner1.png' %}" style=" margin-top: -115px; opacity: 0.9;" alt="First slide">
+        </div>
+        
+ 
+    <div class="container" style="width: 60%;padding: 20px; margin-top: px; background-color: white; opacity: 0.7; border-radius: 15px;">
+      <div class="d-flex flex-row justify-content-start">
+        <img src="{% static 'images/mylogo.png' %}" class="ml-5" style="width:100px;">
+        <h1 style="font-size: 40px;" class="display-4 ml-5 mt-3">Welcome to ARCADEMY!</h1>
+      </div>
+      <center><p class="lead mt-5" style="font-size: 18px;">An Augmented & virtual Reality based e-learning solution for immersive and practical based learning.</p></center>
+      <hr class="my-4">
+      <center><p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'signup' %}" role="button">Start Learning!</a>
+      </p></center>
+    </div>
+
+{% endif %}
+{% endblock content %}
